@@ -19,6 +19,7 @@ import retrofit2.Response
 class DollarActivity :AppCompatActivity(), View.OnClickListener
 {
     private lateinit var resultado: TextView
+    private lateinit var preco: TextView
     private lateinit var valor: EditText
     private lateinit var botao: Button
     private lateinit var voltar: ImageView
@@ -36,8 +37,10 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
         botao = findViewById(R.id.button)
         voltar = findViewById(R.id.voltar)
         avancar = findViewById(R.id.avancar)
+        preco = findViewById(R.id.textoValorAtual)
 
         setListeners()
+        getValor()
     }
 
     override fun onClick(v: View?)
@@ -95,6 +98,35 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
                 val conversion = valor.text.toString().toDouble() * rate
 
                 resultado.setText("%.4f".format(conversion))// "%.2f".format(conversion) faz exibir somente 2 casas decimais
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable)
+            {
+                println("Falhou")
+            }
+
+        })
+
+    }
+
+    private fun getValor()
+    {
+
+        val Client = RetrofitInstance.getInstancia("https://cdn.jsdelivr.net/")
+        val endpoint = Client.create(Get::class.java)
+
+        val BRL = "brl"
+        val USD = "usd"
+
+        endpoint.getValorDollar(BRL ,USD).enqueue(object :
+            Callback<JsonObject>
+        {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>)
+            {
+                var dados = response.body()?.entrySet()?.find { it.key == USD }
+                val rate: Double = dados?.value.toString().toDouble()
+
+                preco.text = "R$ 1 = $ ${"%.4f".format(rate)}"
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable)

@@ -19,6 +19,7 @@ import retrofit2.Response
 class BitcoinActivity : AppCompatActivity(), View.OnClickListener
 {
     private lateinit var resultado: TextView
+    private lateinit var preco: TextView
     private lateinit var valor: EditText
     private lateinit var botao: Button
     private lateinit var voltar: ImageView
@@ -36,8 +37,10 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
         botao = findViewById(R.id.button)
         voltar = findViewById(R.id.voltar)
         avancar = findViewById(R.id.avancar)
+        preco = findViewById(R.id.textoValorAtual)
 
         setListeners()
+        getValor()
     }
 
     override fun onClick(v: View?)
@@ -100,6 +103,32 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable)
             {
+                println("Falhou")
+            }
+
+        })
+
+    }
+
+    private fun getValor()
+    {
+
+        val Client = RetrofitInstance.getInstancia("https://cdn.jsdelivr.net/")
+        val endpoint = Client.create(Get::class.java)
+
+        val BRL = "brl"
+        val BTC = "btc"
+
+        endpoint.getValorBitcoin(BRL, BTC).enqueue(object :
+            Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                var dados = response.body()?.entrySet()?.find { it.key == BTC }
+                val rate: Double = dados?.value.toString().toDouble()
+
+                preco.text = "R$ 1 = ฿ ${"%.6f".format(rate)}"
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 println("Falhou")
             }
 
