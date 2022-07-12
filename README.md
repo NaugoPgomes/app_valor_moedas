@@ -15,6 +15,7 @@
 ## Informações adicionais
  + o App esta sendo desenvolvido em kotlin.
  + o App esta utilizando o Retrofit.
+ + o App utiliza a api do jsdelivr.
  + o App so funciona em dispositivos android.
 
 > Status: Em Desenvolvimento 🚧
