@@ -27,7 +27,7 @@
         android:src="@drawable/bitcoin"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"/>
 
     <TextView
@@ -44,12 +44,12 @@
     <EditText
         android:id="@+id/valor"
         android:layout_marginTop="60dp"
-        android:hint="Valor :"
+        android:hint="Valor em R$  :"
         android:textColorHint="@color/black"
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:minWidth="100dp"
         android:layout_below="@+id/textoValorAtual"/>
 

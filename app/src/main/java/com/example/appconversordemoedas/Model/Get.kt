@@ -17,15 +17,12 @@ interface Get
     fun getValorDasMoedas(@Path(value = "from") from : String,
                           @Path(value = "to") to : String) : Call<JsonObject>
 
-    @GET("/gh/fawazahmed0/currency-api@1/latest/currencies/{from}/{to}.json")
-    fun getValorDollar(@Path(value = "from") from : String,
-                          @Path(value = "to") to : String) : Call<JsonObject>
+    @GET("/gh/fawazahmed0/currency-api@1/latest/currencies/usd/brl.json")
+    fun getValorDollar() : Call<JsonObject>
 
-    @GET("/gh/fawazahmed0/currency-api@1/latest/currencies/{from}/{to}.json")
-    fun getValorEuro(@Path(value = "from") from : String,
-                       @Path(value = "to") to : String) : Call<JsonObject>
+    @GET("/gh/fawazahmed0/currency-api@1/latest/currencies/eur/brl.json")
+    fun getValorEuro() : Call<JsonObject>
 
-    @GET("/gh/fawazahmed0/currency-api@1/latest/currencies/{from}/{to}.json")
-    fun getValorBitcoin(@Path(value = "from") from : String,
-                       @Path(value = "to") to : String) : Call<JsonObject>
+    @GET("/gh/fawazahmed0/currency-api@1/latest/currencies/btc/brl.json")
+    fun getValorBitcoin() : Call<JsonObject>
 }

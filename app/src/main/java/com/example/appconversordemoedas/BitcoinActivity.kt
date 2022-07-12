@@ -98,7 +98,7 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
                 val rate: Double = dados?.value.toString().toDouble()
                 val conversion = valor.text.toString().toDouble() * rate
 
-                resultado.setText("%.4f".format(conversion))// "%.2f".format(conversion) faz exibir somente 2 casas decimais
+                resultado.setText("%.4f".format(conversion))
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable)
@@ -117,15 +117,14 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
         val endpoint = Client.create(Get::class.java)
 
         val BRL = "brl"
-        val BTC = "btc"
 
-        endpoint.getValorBitcoin(BRL, BTC).enqueue(object :
+        endpoint.getValorBitcoin().enqueue(object :
             Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                var dados = response.body()?.entrySet()?.find { it.key == BTC }
+                var dados = response.body()?.entrySet()?.find { it.key == BRL }
                 val rate: Double = dados?.value.toString().toDouble()
 
-                preco.text = "R$ 1 = ฿ ${"%.6f".format(rate)}"
+                preco.text = "O valor atual é de : R$ ${"%.2f".format(rate)}"
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {

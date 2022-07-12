@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.example.appconversordemoedas.Model.Get
 import com.example.appconversordemoedas.Model.RetrofitInstance
 import com.google.gson.JsonObject
@@ -25,10 +26,12 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
     private lateinit var voltar: ImageView
     private lateinit var avancar: ImageView
 
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dollar)
+
 
         getSupportActionBar()?.hide()
 
@@ -38,6 +41,7 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
         voltar = findViewById(R.id.voltar)
         avancar = findViewById(R.id.avancar)
         preco = findViewById(R.id.textoValorAtual)
+
 
         setListeners()
         getValor()
@@ -49,6 +53,7 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
         if (id == R.id.button)
         {
             converterDollar()
+
         }
         else if(id == R.id.avancar)
         {
@@ -97,7 +102,7 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
                 val rate: Double = dados?.value.toString().toDouble()
                 val conversion = valor.text.toString().toDouble() * rate
 
-                resultado.setText("%.4f".format(conversion))// "%.2f".format(conversion) faz exibir somente 2 casas decimais
+                resultado.setText("%.4f".format(conversion))
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable)
@@ -116,17 +121,16 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
         val endpoint = Client.create(Get::class.java)
 
         val BRL = "brl"
-        val USD = "usd"
 
-        endpoint.getValorDollar(BRL ,USD).enqueue(object :
+        endpoint.getValorDollar().enqueue(object :
             Callback<JsonObject>
         {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>)
             {
-                var dados = response.body()?.entrySet()?.find { it.key == USD }
+                var dados = response.body()?.entrySet()?.find { it.key == BRL }
                 val rate: Double = dados?.value.toString().toDouble()
 
-                preco.text = "R$ 1 = $ ${"%.4f".format(rate)}"
+                preco.text = "O valor atual é de : R$ ${"%.4f".format(rate)}"
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable)
