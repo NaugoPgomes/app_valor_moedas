@@ -4,11 +4,9 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.example.appconversordemoedas.Model.Get
 import com.example.appconversordemoedas.Model.RetrofitInstance
@@ -33,7 +31,7 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
         setContentView(R.layout.activity_dollar)
 
 
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         resultado = findViewById(R.id.resultado)
         valor = findViewById(R.id.valor)
@@ -52,8 +50,15 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
         val id = v?.id
         if (id == R.id.button)
         {
-            converterDollar()
+            if(verificaNullo())
+            {
+                valor.setError("O valor não pode estar vazio")
 
+            }
+            else
+            {
+                converterDollar()
+            }
         }
         else if(id == R.id.avancar)
         {
@@ -76,6 +81,17 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
         voltar.setOnClickListener(this)
     }
 
+    private fun verificaNullo():Boolean
+    {
+        var valorVerifica: String = valor.text.toString()
+
+        if(TextUtils.isEmpty(valorVerifica))
+        {
+            return true
+        }
+        return false
+    }
+
 
     fun converterDollar()
     {
@@ -91,6 +107,7 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
         val USD = "usd"
 
 
+
         endpoint.getValorDasMoedas(BRL, USD).enqueue(object :
             Callback<JsonObject>
         {
@@ -102,17 +119,20 @@ class DollarActivity :AppCompatActivity(), View.OnClickListener
                 val rate: Double = dados?.value.toString().toDouble()
                 val conversion = valor.text.toString().toDouble() * rate
 
-                resultado.setText("%.4f".format(conversion))
+                resultado.text = "%.4f".format(conversion)
+
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable)
             {
                 println("Falhou")
             }
-
         })
 
+
+
     }
+
 
     private fun getValor()
     {

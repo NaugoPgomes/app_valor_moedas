@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -43,27 +44,52 @@ class EuroActivity :AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         val id = v?.id
-        if (id == R.id.button) {
-            converterEuro()
-        } else if (id == R.id.avancar) {
+        if (id == R.id.button)
+        {
+            if(verificaNullo())
+            {
+                valor.setError("O valor não pode estar vazio")
+
+            }
+            else
+            {
+                converterEuro()
+            }
+
+        } else if (id == R.id.avancar)
+        {
             val intente = Intent(this, BitcoinActivity::class.java)
             startActivity(intente)
             finish()
-        } else if (id == R.id.voltar) {
+        } else if (id == R.id.voltar)
+        {
             val intente = Intent(this, DollarActivity::class.java)
             startActivity(intente)
             finish()
         }
     }
 
-    private fun setListeners() {
+    private fun setListeners()
+    {
         botao.setOnClickListener(this)
         avancar.setOnClickListener(this)
         voltar.setOnClickListener(this)
     }
 
+    private fun verificaNullo():Boolean
+    {
+        var valorVerifica: String = valor.text.toString()
 
-    fun converterEuro() {
+        if(TextUtils.isEmpty(valorVerifica))
+        {
+            return true
+        }
+        return false
+    }
+
+
+    fun converterEuro()
+    {
 
         val progressDialog = ProgressDialog(this@EuroActivity)
         progressDialog.setMessage("Carregando...")
@@ -97,7 +123,8 @@ class EuroActivity :AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun getValor() {
+    private fun getValor()
+    {
 
         val Client = RetrofitInstance.getInstancia("https://cdn.jsdelivr.net/")
         val endpoint = Client.create(Get::class.java)

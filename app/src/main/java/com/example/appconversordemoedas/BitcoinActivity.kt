@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -48,7 +49,16 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
         val id = v?.id
         if (id == R.id.button)
         {
-            converterBitcoin()
+            if(verificaNullo())
+            {
+                valor.setError("O valor não pode estar vazio")
+
+            }
+            else
+            {
+                converterBitcoin()
+            }
+
         }
         else if(id == R.id.avancar)
         {
@@ -69,6 +79,17 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
         botao.setOnClickListener(this)
         avancar.setOnClickListener(this)
         voltar.setOnClickListener(this)
+    }
+
+    private fun verificaNullo():Boolean
+    {
+        var valorVerifica: String = valor.text.toString()
+
+        if(TextUtils.isEmpty(valorVerifica))
+        {
+            return true
+        }
+        return false
     }
 
 
