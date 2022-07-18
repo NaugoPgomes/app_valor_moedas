@@ -2,7 +2,7 @@
 
 
 ## 📝 informações sobre o projeto 
-  Até o momento o app faz conversão do valor da moeda e mostra o seu valor atual.
+  Até o momento o app faz conversão do valor da moeda, mostra o seu valor atual e Caso o usuário não digite nenhum valor e tente apertar o botão de converter, vai ser exibido uma mensagem falando que aquele campo não pode estar vazio.
  
 ## algumas fotos do app
 
@@ -10,12 +10,15 @@
 ![dollar](https://user-images.githubusercontent.com/80015739/178380652-0e7456f0-00a0-4d03-84a3-e6348b3d627e.png)
 ![bitcoin](https://user-images.githubusercontent.com/80015739/178380672-da4e7bb2-b8e0-46ea-a688-5d852cb38af5.png)
 ![euro2](https://user-images.githubusercontent.com/80015739/178380695-5f6f1536-ecee-45a7-a3c2-382ac707df9f.png)
+![msgVazio](https://user-images.githubusercontent.com/80015739/178512696-fc8ceeee-c38f-4a36-8759-8826085f8e04.png)
+![dollar](https://user-images.githubusercontent.com/80015739/178512737-f29527cc-cd83-4e1d-9c95-ffb85dc7665d.png)
 
 
-## Informações adicionais
+## 💻 Informações adicionais
  + o App esta sendo desenvolvido em kotlin.
  + o App esta utilizando o Retrofit.
  + o App utiliza a api do jsdelivr.
  + o App so funciona em dispositivos android.
 
+🌐 [Link do App](https://play.google.com/store/apps/details?id=com.Android.appconversordemoedas) 
 > Status: Em Desenvolvimento 🚧
