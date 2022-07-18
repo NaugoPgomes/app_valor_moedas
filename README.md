@@ -14,10 +14,11 @@
 ![dollar](https://user-images.githubusercontent.com/80015739/178512737-f29527cc-cd83-4e1d-9c95-ffb85dc7665d.png)
 
 
-## Informações adicionais
+## 💻 Informações adicionais
  + o App esta sendo desenvolvido em kotlin.
  + o App esta utilizando o Retrofit.
  + o App utiliza a api do jsdelivr.
  + o App so funciona em dispositivos android.
 
+🌐 [Link do App](https://play.google.com/store/apps/details?id=com.Android.appconversordemoedas) 
 > Status: Em Desenvolvimento 🚧
