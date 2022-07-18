@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.appconversordemoedas">
+    package="com.Android.appconversordemoedas">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,14 +16,17 @@
         android:theme="@style/Theme.AppConversorDeMoedas"
         tools:targetApi="31">
         <activity
-            android:name=".EuroActivity"
-            android:exported="false" />
+            android:name="com.Android.appconversordemoedas.EuroActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".BitcoinActivity"
-            android:exported="false" />
+            android:name="com.Android.appconversordemoedas.BitcoinActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".DollarActivity"
-            android:exported="true">
+            android:name="com.Android.appconversordemoedas.DollarActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

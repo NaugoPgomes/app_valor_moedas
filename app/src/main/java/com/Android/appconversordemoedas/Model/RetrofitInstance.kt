@@ -1,4 +1,4 @@
-package com.example.appconversordemoedas.Model
+package com.Android.appconversordemoedas.Model
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

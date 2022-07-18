@@ -1,4 +1,4 @@
-package com.example.appconversordemoedas
+package com.Android.appconversordemoedas
 
 import org.junit.Test
 

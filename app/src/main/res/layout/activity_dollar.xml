@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@color/white"
-    tools:context=".DollarActivity">
+    tools:context="com.Android.appconversordemoedas.DollarActivity">
 
     <ImageView
         android:id="@+id/voltar"

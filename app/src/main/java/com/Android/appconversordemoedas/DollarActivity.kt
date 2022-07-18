@@ -1,4 +1,4 @@
-package com.example.appconversordemoedas
+package com.Android.appconversordemoedas
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -8,8 +8,9 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
-import com.example.appconversordemoedas.Model.Get
-import com.example.appconversordemoedas.Model.RetrofitInstance
+import com.Android.appconversordemoedas.Model.Get
+import com.Android.appconversordemoedas.Model.RetrofitInstance
+import com.Android.appconversordemoedas.R
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback

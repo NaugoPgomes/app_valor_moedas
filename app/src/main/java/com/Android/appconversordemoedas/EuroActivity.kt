@@ -1,4 +1,4 @@
-package com.example.appconversordemoedas
+package com.Android.appconversordemoedas
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -10,15 +10,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.appconversordemoedas.Model.Get
-import com.example.appconversordemoedas.Model.RetrofitInstance
+import com.Android.appconversordemoedas.Model.Get
+import com.Android.appconversordemoedas.Model.RetrofitInstance
+import com.Android.appconversordemoedas.R
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class BitcoinActivity : AppCompatActivity(), View.OnClickListener
-{
+class EuroActivity :AppCompatActivity(), View.OnClickListener {
     private lateinit var resultado: TextView
     private lateinit var preco: TextView
     private lateinit var valor: EditText
@@ -26,10 +26,9 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
     private lateinit var voltar: ImageView
     private lateinit var avancar: ImageView
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bitcoin)
+        setContentView(R.layout.activity_euro)
 
         getSupportActionBar()?.hide()
 
@@ -44,8 +43,7 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
         getValor()
     }
 
-    override fun onClick(v: View?)
-    {
+    override fun onClick(v: View?) {
         val id = v?.id
         if (id == R.id.button)
         {
@@ -56,19 +54,17 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
             }
             else
             {
-                converterBitcoin()
+                converterEuro()
             }
 
-        }
-        else if(id == R.id.avancar)
+        } else if (id == R.id.avancar)
         {
-            val intente = Intent(this, DollarActivity::class.java)
+            val intente = Intent(this, BitcoinActivity::class.java)
             startActivity(intente)
             finish()
-        }
-        else if(id == R.id.voltar)
+        } else if (id == R.id.voltar)
         {
-            val intente = Intent(this, EuroActivity::class.java)
+            val intente = Intent(this, DollarActivity::class.java)
             startActivity(intente)
             finish()
         }
@@ -93,37 +89,34 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
     }
 
 
-    fun converterBitcoin()
+    fun converterEuro()
     {
 
-        val progressDialog = ProgressDialog(this@BitcoinActivity)
+        val progressDialog = ProgressDialog(this@EuroActivity)
         progressDialog.setMessage("Carregando...")
         progressDialog.show()
+
 
         val Client = RetrofitInstance.getInstancia("https://cdn.jsdelivr.net/")
         val endpoint = Client.create(Get::class.java)
 
         val BRL = "brl"
-        val BTC = "btc"
+        val EUR = "eur"
 
 
-        endpoint.getValorDasMoedas(BRL, BTC ).enqueue(object :
-            Callback<JsonObject>
-        {
-
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>)
-            {
+        endpoint.getValorDasMoedas(BRL, EUR).enqueue(object :
+            Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 progressDialog.dismiss()
 
-                var dados = response.body()?.entrySet()?.find { it.key == BTC  }
+                var dados = response.body()?.entrySet()?.find { it.key == EUR }
                 val rate: Double = dados?.value.toString().toDouble()
                 val conversion = valor.text.toString().toDouble() * rate
 
                 resultado.setText("%.4f".format(conversion))
             }
 
-            override fun onFailure(call: Call<JsonObject>, t: Throwable)
-            {
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 println("Falhou")
             }
 
@@ -139,13 +132,13 @@ class BitcoinActivity : AppCompatActivity(), View.OnClickListener
 
         val BRL = "brl"
 
-        endpoint.getValorBitcoin().enqueue(object :
+        endpoint.getValorEuro().enqueue(object :
             Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 var dados = response.body()?.entrySet()?.find { it.key == BRL }
                 val rate: Double = dados?.value.toString().toDouble()
 
-                preco.text = "O valor atual é de : R$ ${"%.2f".format(rate)}"
+                preco.text = "O valor atual é de : R$ ${"%.4f".format(rate)}"
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
